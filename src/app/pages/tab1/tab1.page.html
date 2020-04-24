@@ -1,60 +1,101 @@
 <app-toolbar></app-toolbar>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" force-overscroll="true">
     <app-navigationdrawer></app-navigationdrawer>
 
-    <ion-content padding>
+    <ion-card>
+        <ion-avatar style="margin:auto;">
+            <img src="assets/images/user2.png">
+        </ion-avatar>
+        <ion-card-content>
+            <div class="user-meta ion-text-center">
+                <h3>Usuario</h3>
+                <h5>17/11/2024</h5>
+            </div>
 
-        <div class="login-box">
+            <ion-list>
+                <ion-item-sliding #slidingEmail>
+
+                    <ion-item-options side="start">
+                        <ion-item-option slot="icon-only">
+                            <ion-icon name="create-outline" style="zoom: 2.0;" (click)="edit(email, slidingEmail)"></ion-icon>
+                        </ion-item-option>
+                    </ion-item-options>
+
+                    <ion-item>
+                        <ion-icon name="mail-outline" slot="start"></ion-icon>
+
+                        <ion-input type="email" placeholder="juancarlos@gmail.com" required disabled name="email" #email (keyup.enter)="handleInput(email)"></ion-input>
+                    </ion-item>
+
+                </ion-item-sliding>
+
+                <ion-item-sliding #slidingNumber>
+
+                    <ion-item-options side="start">
+                        <ion-item-option slot="icon-only">
+                            <ion-icon name="create-outline" style="zoom: 2.0;" (click)="edit(number, slidingNumber)"></ion-icon>
+                        </ion-item-option>
+                    </ion-item-options>
+
+                    <ion-item>
+                        <ion-icon name="call-outline" slot="start"></ion-icon>
+                        <ion-input type="text" placeholder="12345656" name="number" #number></ion-input>
+                    </ion-item>
+
+                </ion-item-sliding>
+
+                <ion-item-sliding #slidingPassword>
+
+                    <ion-item-options side="start">
+                        <ion-item-option slot="icon-only">
+                            <ion-icon name="create-outline" style="zoom: 2.0;"></ion-icon>
+                        </ion-item-option>
+                    </ion-item-options>
+
+                    <ion-item expand="full">
+                        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+                        <ion-input type="text" placeholder="******" required isEmpty name="password" #password (click)="edit(password, slidingPassword)"></ion-input>
+                    </ion-item>
+
+                </ion-item-sliding>
 
 
-            <ion-avatar padding style="margin:auto;">
-                <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-            </ion-avatar>
 
-
-            <form (ngSubmit)="save(saveForm)" #saveForm="ngForm">
-                <ion-row>
-                    <ion-col>
-                        <ion-list inset>
-
-                            <ion-item>
-                                <ion-input type="text" placeholder="Name" name="name" [(ngModel)]="info.name" required></ion-input>
-                            </ion-item>
-
-                            <ion-item>
-                                <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="info.email" required></ion-input>
-                            </ion-item>
-
-                            <ion-item>
-                                <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="info.password"></ion-input>
-                                <small>Blank field don't modify password</small>
-                            </ion-item>
-
-                        </ion-list>
-                    </ion-col>
-                </ion-row>
-
-                <ion-row>
-                    <ion-col class="signup-col">
-                        <ion-button class="submit-btn" full type="submit" [disabled]="!saveForm.form.valid">Save</ion-button>
-                    </ion-col>
-                </ion-row>
-
-            </form>
-        </div>
+                <ion-item expand="full">
+                    <ion-icon name="location-outline" slot="start"></ion-icon>
+                    <ion-label>Direccion</ion-label>
+                    <ion-icon name="add-circle" slot="end" (click)="presentAlertPrompt()"></ion-icon>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
 
 
 
+    <ion-card>
+        <ion-item-sliding>
+            <ion-item-options side="start">
+                <ion-item-option slot="icon-only">
+                    <ion-icon name="create-outline" style="zoom: 2.0;"></ion-icon>
+                </ion-item-option>
 
+            </ion-item-options>
 
+            <ion-item>
+                <ion-icon name="locate-outline" slot="start"></ion-icon>
+                <ion-card-content>
+                    <ion-label>Mi Casa</ion-label>
+                    Avenida siempre viva Exterior: 6607 Tel: 4652575
+                </ion-card-content>
+            </ion-item>
 
+            <ion-item-options side="end">
+                <ion-item-option slot="icon-only" color="danger">
+                    <ion-icon name="trash-outline" style="zoom:2.0;"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
 
-        <!-- <ion-footer-bar  class="bar button-bar-footer" style="height: auto;">   -->
-        <div id="footer" class="button-bar">
-            <a style="min-width: 50%;border-radius: 0px;" ng-click="cancel()" class="button button-lite icon-left ion-close">Cancel</a>
-            <a style="min-width: 50%;border-radius: 0px;" ng-click="save(user_extras,data_editable)" class="button button-assertive icon-left ion-checkmark">Save</a>
-        </div>
-        <!-- </ion-footer-bar>  -->
-
-    </ion-content>
+    </ion-card>
+</ion-content>

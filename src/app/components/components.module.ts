@@ -5,6 +5,7 @@ import { ExploreContainerComponent } from './explore-container/explore-container
 import { NavigationdrawerComponent } from './navigationdrawer/navigationdrawer.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ModalCartComponent } from './modal-cart/modal-cart.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -13,7 +14,8 @@ import { ModalCartComponent } from './modal-cart/modal-cart.component';
     ExploreContainerComponent,
     NavigationdrawerComponent,
     ToolbarComponent,
-    ModalCartComponent
+    ModalCartComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { ModalCartComponent } from './modal-cart/modal-cart.component';
     ExploreContainerComponent,
     NavigationdrawerComponent,
     ToolbarComponent,
-    ModalCartComponent
+    ModalCartComponent,
+    LoginComponent
   ]
 })
 export class ComponentsModule { }
