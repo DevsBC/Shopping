@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +8,13 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
+  info: any = {};
+
   constructor() {}
 
+  save(form: NgForm) {
+    if (form.invalid) { return; }
+
+    console.log('Salvado compa');
+  }
 }
