@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController, NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -14,10 +14,22 @@ export class Tab1Page {
   info: any = {};
   isEditing = false;
   inputEditing: any;
+  @ViewChild('password', {static: false}) password: ElementRef;
+  passwordShown =  false;
 
-  constructor(public alertController: AlertController) {}
+  constructor(public alertController: AlertController,
+              public navCtrl: NavController) {}
+
+  showPassword(password) {
+    if (password.type === 'text') {
+      password.type = 'password';
+    } else {
+      password.type = 'text';
+    }
+  }
 
   handleInput(input: any) {
+    console.log(input);
     input.disabled = true;
     this.isEditing = false;
   }
@@ -36,7 +48,9 @@ export class Tab1Page {
     this.isEditing = true;
     this.inputEditing = input;
     await sliding.close();
-    input.setFocus();
+    setTimeout(() => {
+      input.setFocus();
+    }, 150);
   }
 
   async presentAlertPrompt() {
