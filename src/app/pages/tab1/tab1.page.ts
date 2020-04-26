@@ -14,17 +14,17 @@ export class Tab1Page {
   info: any = {};
   isEditing = false;
   inputEditing: any;
-  @ViewChild('password', {static: false}) password: ElementRef;
+  slidingItem: any;
   passwordShown =  false;
 
-  constructor(public alertController: AlertController,
-              public navCtrl: NavController) {}
+  constructor(public alertController: AlertController) {}
 
   showPassword(password) {
     if (password.type === 'text') {
       password.type = 'password';
     } else {
       password.type = 'text';
+      this.passwordShown = true;
     }
   }
 
@@ -32,6 +32,11 @@ export class Tab1Page {
     console.log(input);
     input.disabled = true;
     this.isEditing = false;
+    if (this.passwordShown) {
+      input.type = 'password';
+      this.passwordShown = false;
+    }
+    this.slidingItem.close('end');
   }
 
   save(form: NgForm) {
@@ -44,10 +49,15 @@ export class Tab1Page {
     if (this.isEditing) {
       this.inputEditing.disabled = true;
     }
+    if (this.passwordShown) {
+      this.inputEditing.type = 'password';
+      this.passwordShown = false;
+    }
     input.disabled = false;
     this.isEditing = true;
     this.inputEditing = input;
-    await sliding.close();
+    this.slidingItem = sliding;
+    await sliding.close().then(sliding.open('end'));
     setTimeout(() => {
       input.setFocus();
     }, 150);
@@ -55,66 +65,40 @@ export class Tab1Page {
 
   async presentAlertPrompt() {
     const alert = await this.alertController.create({
-      header: 'Prompt!',
+      header: 'Nueva direccion',
       inputs: [
         {
-          name: 'name1',
+          name: 'name',
           type: 'text',
-          placeholder: 'Placeholder 1'
+          placeholder: 'Nombre'
         },
         {
-          name: 'name2',
+          name: 'address',
           type: 'text',
-          id: 'name2-id',
-          value: 'hello',
-          placeholder: 'Placeholder 2'
+          placeholder: 'Calle, numero int/ext'
+        },
+        {
+          name: 'zipcode',
+          type: 'text',
+          placeholder: 'Codigo postal'
         },
         // multiline input.
         {
-          name: 'paragraph',
-          id: 'paragraph',
-          type: 'textarea',
-          placeholder: 'Placeholder 3'
-        },
-        {
-          name: 'name3',
-          value: 'http://ionicframework.com',
-          type: 'url',
-          placeholder: 'Favorite site ever'
-        },
-        // input date with min & max
-        {
-          name: 'name4',
-          type: 'date',
-          min: '2017-03-01',
-          max: '2018-01-12'
-        },
-        // input date without min nor max
-        {
-          name: 'name5',
-          type: 'date'
-        },
-        {
-          name: 'name6',
+          name: 'phone',
           type: 'number',
-          min: -5,
-          max: 10
+          placeholder: 'Numero de contacto'
         },
-        {
-          name: 'name7',
-          type: 'number'
-        }
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
             console.log('Confirm Cancel');
           }
         }, {
-          text: 'Ok',
+          text: 'Guardar',
           handler: () => {
             console.log('Confirm Ok');
           }
