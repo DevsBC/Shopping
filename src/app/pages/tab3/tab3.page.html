@@ -3,10 +3,124 @@
 <ion-content [fullscreen]="true">
     <app-navigationdrawer></app-navigationdrawer>
 
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-title size="large">Tab 3</ion-title>
-        </ion-toolbar>
-    </ion-header>
+
+
+    <ion-content>
+        <ion-list>
+            <ion-radio-group>
+                <ion-list-header>
+                    <ion-text color="primary">
+                        <h1>Metodo de envio</h1>
+                    </ion-text>
+                </ion-list-header>
+
+                <ion-item>
+                    <ion-label>A domicilio</ion-label>
+                    <ion-icon name="car" slot="start"></ion-icon>
+                    <ion-radio value="delivery"> </ion-radio>
+                </ion-item>
+                <ion-slides>
+
+
+                    <ion-slide class="activeSlide">
+                        <ion-card>
+                            <ion-icon name="locate-outline" slot="start"></ion-icon>
+                            <ion-card-content>
+                                <ion-label>Mi Casa</ion-label>
+                                Avenida siempre viva Exterior: 6607 Tel: 4652575
+                            </ion-card-content>
+                        </ion-card>
+
+                    </ion-slide>
+
+                    <ion-slide>
+                        <ion-card>
+                            <ion-icon name="locate-outline" slot="start"></ion-icon>
+                            <ion-card-content>
+                                <ion-label>Mi Casa</ion-label>
+                                Avenida siempre viva Exterior: 6607 Tel: 4652575
+                            </ion-card-content>
+                        </ion-card>
+
+                    </ion-slide>
+
+                </ion-slides>
+                <ion-item>
+                    <ion-label>Recoger en tienda</ion-label>
+                    <ion-icon name="walk" slot="start"></ion-icon>
+                    <ion-radio value="duesenberg"></ion-radio>
+                </ion-item>
+            </ion-radio-group>
+
+            <ion-radio-group>
+                <ion-list-header>
+                    <ion-text color="primary">
+                        <h1>Metodo de pago</h1>
+                    </ion-text>
+                </ion-list-header>
+
+                <ion-item>
+                    <ion-label>Tarjeta</ion-label>
+                    <ion-icon name="card-outline" slot="start"></ion-icon>
+                    <ion-radio value="cord"></ion-radio>
+                </ion-item>
+
+                <div>
+
+                    <div class="card-container"></div>
+
+                    <form card container=".card-container" formatting="false" debug="true">
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col size="12">
+                                    <ion-item>
+                                        <ion-icon name="card-outline" slot="start"></ion-icon>
+                                        <input type="text" name="number" card-number placeholder="XXXX XXXX XXXX XXXX" />
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size="12">
+                                    <ion-item>
+                                        <ion-icon name="person-outline" slot="start"></ion-icon>
+                                        <input type="text" name="first-name" card-name placeholder="Nombre completo" />
+                                    </ion-item>
+                                    <ion-col size="4">
+                                        <ion-item>
+                                            <ion-icon name="albums-outline"></ion-icon>
+                                            <input type="text" name="expiry" card-expiry style="width: 50%;" placeholder="MM/YY" />
+                                            <input type="text" name="cvc" card-cvc style="width: 50%;" placeholder="CVC" />
+                                        </ion-item>
+                                    </ion-col>
+                                </ion-col>
+
+
+                            </ion-row>
+                        </ion-grid>
+
+                    </form>
+                </div>
+
+
+
+                <ion-item>
+                    <ion-label>En efectivo</ion-label>
+                    <ion-icon name="cash-outline" slot="start"></ion-icon>
+                    <ion-radio value="duesenberg"></ion-radio>
+                </ion-item>
+            </ion-radio-group>
+        </ion-list>
+
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>Total: $24</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+                2 productos en tu carro de compras
+            </ion-card-content>
+        </ion-card>
+        <ion-button expand="full" color="success">
+            PAGAR
+        </ion-button>
+    </ion-content>
 
 </ion-content>

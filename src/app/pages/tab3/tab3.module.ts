@@ -6,13 +6,14 @@ import { FormsModule } from '@angular/forms';
 import { Tab3Page } from './tab3.page';
 import { Tab3PageRoutingModule } from './tab3-routing.module'
 import { ComponentsModule } from '../../components/components.module';
-
+import { CardModule } from 'ngx-card/ngx-card';
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
     ComponentsModule,
+    CardModule,
     RouterModule.forChild([{ path: '', component: Tab3Page }]),
     Tab3PageRoutingModule,
   ],
