@@ -4,7 +4,7 @@
         <ion-row>
             <ion-col>
                 <div class="ion-text-start" color="secondary">
-                    <p>Cart List</p>
+                    <p>Lista de compra</p>
                 </div>
             </ion-col>
             <ion-col>
@@ -20,52 +20,53 @@
     <div class="ion-padding">
 
         <ion-list>
-            <ion-item class="ion-text-wrap">
+            <ion-item class="ion-text-wrap" *ngFor="let item of cartItems" #ionItem>
                 <ion-grid>
                     <ion-row class="ion-align-items-center">
                         <ion-col size="2" class="ion-align-self-start">
-                            <ion-button color="medium" fill="clear">
+                            <ion-button color="medium" fill="clear" (click)="removeItem(item, labelAmount)">
                                 <ion-icon name="remove-circle" slot="icon-only"></ion-icon>
                             </ion-button>
                         </ion-col>
 
                         <ion-col size="1" class="ion-align-self-center">
-                            2
+                            <ion-label #labelAmount>{{ item.amount }}</ion-label>
                         </ion-col>
 
                         <ion-col size="2" class="ion-align-self-center">
-                            <ion-button color="medium" fill="clear">
+                            <ion-button color="medium" fill="clear" (click)="addItem(item, labelAmount)">
                                 <ion-icon name="add-circle" slot="icon-only"></ion-icon>
                             </ion-button>
                         </ion-col>
 
-                        <ion-col size="2" offset="5">
-                            <ion-button color="medium" fill="clear">
+                        <ion-col size="1" offset="5">
+                            <ion-button color="danger" fill="clear" (click)="deleteFromCart(item, ionItem)">
                                 <ion-icon name="close-circle" slot="icon-only"></ion-icon>
                             </ion-button>
                         </ion-col>
                     </ion-row>
                     <ion-row>
                         <ion-col size="9">
-                            <b>coca</b>
+                            <b>{{item.name}}</b>
                         </ion-col>
                         <ion-col size="3" class="ion-text-end">
                             <ion-label color="secondary">
-                                24
+                                {{item.totalPrice}}
                             </ion-label>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
             </ion-item>
+
             <ion-item>
                 <ion-grid>
                     <ion-row>
                         <ion-col size="9">
-                            Total KES:
+                            Total:
                         </ion-col>
                         <ion-col size="3" class="ion-text-end">
                             <ion-label color="secondary">
-                                24
+                                {{totalPrice}}
                             </ion-label>
                         </ion-col>
                     </ion-row>
@@ -73,8 +74,8 @@
             </ion-item>
         </ion-list>
 
-        <ion-button expand="block" shape="round">
-            Checkout
+        <ion-button expand="block" shape="round" (click)="checkout()">
+            Pedir
         </ion-button>
     </div>
 

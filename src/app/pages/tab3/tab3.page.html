@@ -1,6 +1,6 @@
-<app-toolbar></app-toolbar>
+<app-toolbar [quantity]="totalProducts"></app-toolbar>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="animated fadeIn">
     <app-navigationdrawer></app-navigationdrawer>
 
 
@@ -14,42 +14,31 @@
                     </ion-text>
                 </ion-list-header>
 
-                <ion-item>
+                <!--<ion-item>
                     <ion-label>A domicilio</ion-label>
                     <ion-icon name="car" slot="start"></ion-icon>
-                    <ion-radio value="delivery"> </ion-radio>
+                    <ion-radio value="delivery" (click)="shipping($event)"> </ion-radio>
+                </ion-item> -->
+
+                <ion-item>
+                    <ion-label>Recoger en tienda</ion-label>
+                    <ion-icon name="walk" slot="start"></ion-icon>
+                    <ion-radio value="storePickup" (click)="shipping($event)"></ion-radio>
                 </ion-item>
-                <ion-slides>
 
-
+                <ion-slides *ngIf="shippingMethod === 'storePickup'" class="animated shake">
                     <ion-slide class="activeSlide">
                         <ion-card>
                             <ion-icon name="locate-outline" slot="start"></ion-icon>
                             <ion-card-content>
-                                <ion-label>Mi Casa</ion-label>
-                                Avenida siempre viva Exterior: 6607 Tel: 4652575
-                            </ion-card-content>
-                        </ion-card>
-
-                    </ion-slide>
-
-                    <ion-slide>
-                        <ion-card>
-                            <ion-icon name="locate-outline" slot="start"></ion-icon>
-                            <ion-card-content>
-                                <ion-label>Mi Casa</ion-label>
-                                Avenida siempre viva Exterior: 6607 Tel: 4652575
+                                Av. Tecnológico 3070, Fraccionamiento, 32618 Cd Juárez, Chih. Tel: 656 686 2200
                             </ion-card-content>
                         </ion-card>
 
                     </ion-slide>
 
                 </ion-slides>
-                <ion-item>
-                    <ion-label>Recoger en tienda</ion-label>
-                    <ion-icon name="walk" slot="start"></ion-icon>
-                    <ion-radio value="duesenberg"></ion-radio>
-                </ion-item>
+
             </ion-radio-group>
 
             <ion-radio-group>
@@ -62,14 +51,13 @@
                 <ion-item>
                     <ion-label>Tarjeta</ion-label>
                     <ion-icon name="card-outline" slot="start"></ion-icon>
-                    <ion-radio value="cord"></ion-radio>
+                    <ion-radio value="creditcard" (click)="payment($event)"></ion-radio>
                 </ion-item>
 
-                <div>
+                <div *ngIf="paymentMethod === 'creditcard'">
+                    <div class="card-container animated flipInX"></div>
 
-                    <div class="card-container"></div>
-
-                    <form card container=".card-container" formatting="false" debug="true">
+                    <form card container=".card-container" formatting="false" debug="true" class="animated fadeInLeft">
                         <ion-grid>
                             <ion-row>
                                 <ion-col size="12">
@@ -104,21 +92,21 @@
                 <ion-item>
                     <ion-label>En efectivo</ion-label>
                     <ion-icon name="cash-outline" slot="start"></ion-icon>
-                    <ion-radio value="duesenberg"></ion-radio>
+                    <ion-radio value="cash" (click)="payment($event)"></ion-radio>
                 </ion-item>
             </ion-radio-group>
         </ion-list>
 
         <ion-card>
             <ion-card-header>
-                <ion-card-title>Total: $24</ion-card-title>
+                <ion-card-title>Total: $ {{ totalPrice }}</ion-card-title>
             </ion-card-header>
 
             <ion-card-content>
-                2 productos en tu carro de compras
+                {{message}}
             </ion-card-content>
         </ion-card>
-        <ion-button expand="full" color="success">
+        <ion-button expand="full" color="success" (click)="payAndProceed()">
             PAGAR
         </ion-button>
     </ion-content>

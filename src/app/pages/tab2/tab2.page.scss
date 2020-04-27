@@ -29,7 +29,6 @@ ion-badge {
     left: 18px;
     color: white;
     text-align: left;
-    font-family: 'Libre Baskerville', serif;
 }
 
 .block {
@@ -51,4 +50,24 @@ ion-badge {
     padding-left: 20px;
     text-align: center;
     font-weight: bold;
+}
+
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.productText {
+    color: #4b9d2e;
+    font-family: 'Klavika', sans-serif;
+    font-size: 12pt!important;
+}
+
+.luchofertas {
+    position: absolute;
+    width: 150px;
+    z-index: 2;
+    top: 40px;
 }

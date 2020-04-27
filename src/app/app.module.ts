@@ -10,10 +10,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ModalCartComponent } from './components/modal-cart/modal-cart.component';
 import { ComponentsModule } from './components/components.module';
+import { ModalProofPaymentComponent } from './components/modal-proof-payment/modal-proof-payment.component';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [ModalCartComponent],
+  entryComponents: [ModalCartComponent, ModalProofPaymentComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ComponentsModule],
   providers: [
     StatusBar,

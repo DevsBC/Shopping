@@ -1,20 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ModalCartComponent } from '../modal-cart/modal-cart.component';
+
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
 })
-export class ToolbarComponent implements OnInit {
 
-  constructor(public modalController: ModalController) { }
+export class ToolbarComponent {
+  @Input() quantity = 0;
 
-  ngOnInit() {}
+  constructor(public modalController: ModalController) {}
 
   async presentModal() {
-    console.log('[endejo');
     const modal = await this.modalController.create({
       component: ModalCartComponent,
       componentProps: {
@@ -24,4 +24,6 @@ export class ToolbarComponent implements OnInit {
     });
     return await modal.present();
   }
+
+
 }

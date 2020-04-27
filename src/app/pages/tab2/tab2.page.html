@@ -1,21 +1,25 @@
-<app-toolbar></app-toolbar>
+<app-toolbar [quantity]="getCount()"></app-toolbar>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="animated fadeIn">
     <app-navigationdrawer></app-navigationdrawer>
 
+    <ion-img src="assets/icon/Luchofertas.png" class="luchofertas"></ion-img>
+
     <!-- Promos -->
-    <ion-slides class="slide-padding" pager="false">
+    <ion-slides class="slide-padding" pager="false" [options]="sliderPromo">
         <ion-slide *ngFor="let promo of promos">
             <div class="container">
-                <ion-img src="{{promo.img}}"></ion-img>
+                <ion-img src="{{promo.img}}" style="height: 200px"></ion-img>
                 <h2 class="slidetitle">
-                    <span class="block">{{promo.nameProduct}}</span>
+                    <span class="block">{{promo.name}}</span>
                 </h2>
-                <ion-button (click)="addToCart(promo)" expand="full" style="float: right;">
-                    <ion-icon name="add-outline"></ion-icon>
-                </ion-button>
+                <ion-fab-button style="float: right;" color="light" size="small" (click)="addToCart(promo)">
+                    <ion-icon name="add-circle-outline" color="success" style="zoom:2.0"></ion-icon>
+                </ion-fab-button>
                 <div class="sub-headers">
-                    <p>$ {{promo.price}}</p>
+                    <ion-text color="danger" slot="end">
+                        <h2 style="font-family: 'Cunia', sans-serif;">$ {{ promo.totalPrice.toFixed(2) }}</h2>
+                    </ion-text>
                 </div>
 
             </div>
@@ -28,7 +32,7 @@
     <div *ngFor="let cat of items" class="category-block">
 
         <ion-row no-padding class="category-banner" expand="full">
-            <ion-col text-left button tappable (click)="cat.expanded = !cat.expanded" align-self-center>
+            <ion-col text-left button tappable (click)="expandCategory(cat)" align-self-center>
                 {{ cat.category }}
                 <ion-icon [name]="getIcon(cat.expanded)" style="float: right;"></ion-icon>
             </ion-col>
@@ -36,52 +40,37 @@
 
         <ion-slides [options]="sliderConfig">
             <ion-slide *ngFor="let product of cat.products">
-                <div *ngIf="cat.expanded">
-                    <ion-card>
-                        <ion-card-header>
-                            <ion-card-title>
-                                {{ product.name }}
-                                <ion-grid>
-                                    <ion-row class="ion-align-items-center">
-                                        <ion-col size="5" class="ion-align-self-start">
-                                            <ion-button color="medium" fill="clear">
-                                                <ion-icon name="remove-circle" slot="icon-only"></ion-icon>
-                                            </ion-button>
-                                        </ion-col>
-
-                                        <ion-col size="1" class="ion-align-self-center">
-                                            2
-                                        </ion-col>
-
-                                        <ion-col size="5" class="ion-align-self-center">
-                                            <ion-button color="medium" fill="clear">
-                                                <ion-icon name="add-circle" slot="icon-only"></ion-icon>
-                                            </ion-button>
-                                        </ion-col>
-
-                                    </ion-row>
-                                </ion-grid>
-
-                            </ion-card-title>
+                <ion-card *ngIf="cat.expanded">
+                    <ion-card-header>
+                        <ion-card-title>
+                            <ion-fab-button size="small" style="float: right;" color="light" (click)="addToCart(product)">
+                                <ion-icon name="add-circle-outline" color="success" style="zoom:2.0"></ion-icon>
+                            </ion-fab-button>
+                        </ion-card-title>
+                        <ion-card-subtitle class="truncate">
 
 
-                        </ion-card-header>
-                        <ion-card-content>
-                            <img src="https://via.placeholder.com/300x300">
-                            <ion-item>
-                                <ion-text color="primary" slot="start">
-                                    <h1>$ {{ product.price }}</h1>
-                                </ion-text>
-                                <ion-button (click)="addToCart(product)" slot="end">
-
-                                    <ion-icon name="add-outline"></ion-icon>
-                                </ion-button>
-                            </ion-item>
+                        </ion-card-subtitle>
 
 
-                        </ion-card-content>
-                    </ion-card>
-                </div>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <img [src]="product.img">
+                        <ion-text slot="start">
+                            <h1 class="truncate productText"> {{ product.name }}
+                            </h1>
+                        </ion-text>
+                        <ion-text color="danger" slot="end">
+                            <h2 style="font-family: 'Cunia', sans-serif;">$ {{ product.totalPrice.toFixed(2) }}</h2>
+                        </ion-text>
+
+
+
+
+
+
+                    </ion-card-content>
+                </ion-card>
             </ion-slide>
         </ion-slides>
     </div>

@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AlertController, NavController, NavParams } from '@ionic/angular';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-tab1',
@@ -16,8 +17,12 @@ export class Tab1Page {
   inputEditing: any;
   slidingItem: any;
   passwordShown =  false;
+  totalProducts: number;
+  constructor(public alertController: AlertController, private cartService: CartService) {}
 
-  constructor(public alertController: AlertController) {}
+  ionViewWillEnter() {
+    this.totalProducts = this.cartService.getCountCart();
+  }
 
   showPassword(password) {
     if (password.type === 'text') {
